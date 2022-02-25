@@ -93,14 +93,14 @@ def main():
                                             try:
                                                 request = requests.get(base_html_url.format(tweet_id=result['rest_id']))
                                                 request.raise_for_status()
-                                            except HTTPError:
+                                            except requests.exceptions.HTTPError:
                                                 print('HTTPError. Invalid response code or smth')
                                                 if not retry_flag:
                                                     retry_flag = True
                                                     time.sleep(1.5)
                                                     continue
                                                 break
-                                            except ConnectionError:
+                                            except requests.exceptions.ConnectionError:
                                                 print('Connection Error')
                                                 break
                                             else:
